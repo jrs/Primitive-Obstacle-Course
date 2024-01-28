@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class Spinner : MonoBehaviour
 {
-    public float rotationSpeedX = 0f;
-    public float rotationSpeedY = 0f;
-    public float rotationSpeedZ = 0f;
+    public float rotationSpeed = 50f;
+    public string direction;
+    Vector3 _direction = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        direction = direction.ToUpper();
+
+        switch (direction)
+        {
+            case "X": _direction = Vector3.right; break;
+            case "Y": _direction = Vector3.up; break;
+            case "Z": _direction = Vector3.forward; break;
+                default: _direction = Vector3.up; break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         //transform.Rotate(rotationSpeedX, rotationSpeedY, rotationSpeedZ);
-        transform.Rotate(Vector3.forward, rotationSpeedZ * Time.deltaTime);
+        transform.Rotate(_direction, rotationSpeed * Time.deltaTime);
     }
 }
